@@ -55,6 +55,7 @@ gem 'devise'
 gem 'omniauth-facebook'
 gem 'koala', "~> 2.0" #fb graph API
 gem "omniauth-google-oauth2"
+gem "omniauth-twitter"
 
 group :development, :test do
   # Call 'byebug' anywhere in the code to stop execution and get a debugger console

@@ -57,6 +57,9 @@
   });
   videojs("vid1").ready(function(){
     this.cuepoints();
+    $(".vjs-load-progress").on('click',function() {
+      removeLoop();
+    })
   });
   function setloopBetween(start,end) {
     removeLoop();

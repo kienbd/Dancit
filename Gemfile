@@ -57,6 +57,16 @@ gem 'koala', "~> 2.0" #fb graph API
 gem "omniauth-google-oauth2"
 gem "omniauth-twitter"
 
+# view count
+gem 'acts_as_commentable'
+
+# commentable
+gem 'impressionist'
+
+# like/vote
+gem 'acts_as_votable'
+
+
 group :development, :test do
   # Call 'byebug' anywhere in the code to stop execution and get a debugger console
   gem 'byebug'

@@ -11,7 +11,50 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20151005212820) do
+ActiveRecord::Schema.define(version: 20151006100436) do
+
+  create_table "course_video_relationships", force: :cascade do |t|
+    t.integer  "course_id"
+    t.integer  "video_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
+  create_table "courses", force: :cascade do |t|
+    t.integer  "user_id"
+    t.integer  "image_id"
+    t.string   "name"
+    t.string   "description"
+    t.string   "thumbnail"
+    t.datetime "created_at",  null: false
+    t.datetime "updated_at",  null: false
+  end
+
+  create_table "favourites", force: :cascade do |t|
+    t.integer  "user_id"
+    t.integer  "target_id"
+    t.string   "type"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
+  create_table "fellowships", force: :cascade do |t|
+    t.integer  "follower_id"
+    t.integer  "following_id"
+    t.datetime "created_at",   null: false
+    t.datetime "updated_at",   null: false
+  end
+
+  create_table "stages", force: :cascade do |t|
+    t.string   "name"
+    t.integer  "video_id"
+    t.integer  "image_id"
+    t.string   "start_at"
+    t.string   "end_at"
+    t.string   "thumbnail"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
 
   create_table "users", force: :cascade do |t|
     t.string   "email",                  default: "", null: false
@@ -50,5 +93,17 @@ ActiveRecord::Schema.define(version: 20151005212820) do
 
   add_index "users", ["email"], name: "index_users_on_email", unique: true
   add_index "users", ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true
+
+  create_table "videos", force: :cascade do |t|
+    t.integer  "user_id"
+    t.integer  "image_id"
+    t.string   "remote_url"
+    t.string   "thumbnail"
+    t.string   "name"
+    t.string   "description"
+    t.string   "artist"
+    t.datetime "created_at",  null: false
+    t.datetime "updated_at",  null: false
+  end
 
 end

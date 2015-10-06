@@ -5,6 +5,13 @@ class User < ActiveRecord::Base
          :recoverable, :rememberable, :trackable, :validatable,
          :omniauthable, :omniauth_providers => [:twitter,:facebook, :google_oauth2]
 
+  #Relationships
+  has_many :courses
+  has_many :videos
+  has_many :favourites
+  has_many :favourite_videos, -> {where type: "video"},class_name: Favourite
+  has_many :favourite_courses, -> {where type: "course"},class_name: Favourite
+
   def self.from_omniauth(auth)
     user = where(email: auth.info.email).first_or_create do |user|
       # user.send("#{auth.provider[0]}_uid") = auth.uid

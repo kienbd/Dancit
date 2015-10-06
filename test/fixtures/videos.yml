@@ -1,0 +1,15 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  user_id: MyString
+  remote_url: MyString
+  name: MyString
+  description: MyString
+  artist: MyString
+
+two:
+  user_id: MyString
+  remote_url: MyString
+  name: MyString
+  description: MyString
+  artist: MyString

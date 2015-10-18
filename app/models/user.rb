@@ -12,6 +12,19 @@ class User < ActiveRecord::Base
   has_many :favourite_videos, -> {where type: "video"},class_name: Favourite
   has_many :favourite_courses, -> {where type: "course"},class_name: Favourite
 
+  #Fellowships
+  has_many :active_fellowships, class_name:  Fellowship,
+                                    foreign_key: "follower_id",
+                                    dependent:   :destroy
+  has_many :passive_fellowships, class_name:  Fellowship,
+                                   foreign_key: "followed_id",
+                                   dependent:   :destroy
+  has_many :following, through: :active_fellowships,  source: :followed
+  has_many :followers, through: :passive_fellowships, source: :follower
+
+  # vote and like
+  acts_as_voter
+
   def self.from_omniauth(auth)
     user = where(email: auth.info.email).first_or_create do |user|
       # user.send("#{auth.provider[0]}_uid") = auth.uid

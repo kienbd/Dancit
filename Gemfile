@@ -56,6 +56,7 @@ gem 'omniauth-facebook'
 gem 'koala', "~> 2.0" #fb graph API
 gem "omniauth-google-oauth2"
 gem "omniauth-twitter"
+gem "rails-erd"
 
 # view count
 gem 'acts_as_commentable'

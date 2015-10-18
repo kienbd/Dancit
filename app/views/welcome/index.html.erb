@@ -1,7 +1,8 @@
 <video id="vid1" class="video-js vjs-default-skin vjs-big-play-centered" controls width="640" height="464"
   poster="http://video-js.zencoder.com/oceans-clip.png"
-  data-setup='{ "techOrder": ["youtube"], "src": "http://www.youtube.com/watch?v=xjS6SftYQaQ" }' >
+  data-setup='{ "techOrder": ["youtube"], "src": "http://www.youtube.com/watch?v=xjS6SftYQaQ"}' >
 </video>
+
 
 
 <div id="fieldSelection">
@@ -60,6 +61,7 @@
     $(".vjs-load-progress").on('click',function() {
       removeLoop();
     })
+    $(".vjs-playback-rate").removeClass("vjs-hidden");
   });
   function setloopBetween(start,end) {
     removeLoop();

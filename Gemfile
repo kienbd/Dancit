@@ -58,10 +58,10 @@ gem "omniauth-google-oauth2"
 gem "omniauth-twitter"
 gem "rails-erd"
 
-# view count
+# commentable
 gem 'acts_as_commentable'
 
-# commentable
+# view count
 gem 'impressionist'
 
 # like/vote

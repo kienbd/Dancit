@@ -10,4 +10,7 @@ class Course < ActiveRecord::Base
 
   #like
   acts_as_votable
+
+  #comment
+  acts_as_commentable
 end

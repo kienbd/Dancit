@@ -6,6 +6,8 @@ class Video < ActiveRecord::Base
   has_many :courses, :through => :course_video_relationships
   has_many :stages
 
+  mount_uploader :local_remote_url, LocalVideoUploader
+
   #view count
   is_impressionable
 

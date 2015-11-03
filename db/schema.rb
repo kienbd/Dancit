@@ -141,13 +141,15 @@ ActiveRecord::Schema.define(version: 20151018224507) do
   create_table "videos", force: :cascade do |t|
     t.integer  "user_id"
     t.integer  "image_id"
-    t.string   "remote_url"
+    t.string   "s3_remote_url"
+    t.string   "local_remote_url"
+    t.string   "youtube_remote_url"
     t.string   "thumbnail"
     t.string   "name"
     t.string   "description"
     t.string   "artist"
-    t.datetime "created_at",  null: false
-    t.datetime "updated_at",  null: false
+    t.datetime "created_at",         null: false
+    t.datetime "updated_at",         null: false
   end
 
   create_table "votes", force: :cascade do |t|

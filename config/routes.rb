@@ -9,6 +9,14 @@ Rails.application.routes.draw do
   end
   resources :users
 
+  resources :videos,only: [:index,:show,:create,:new,:edit,:update] do
+
+  end
+
+  resources :courses,only: [:index,:show,:create,:new,:edit,:update] do
+
+  end
+
 
 
   # The priority is based upon order of creation: first created -> highest priority.

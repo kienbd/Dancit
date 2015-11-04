@@ -37,10 +37,14 @@ gem "font-awesome-rails"
 gem 'bootstrap-sass', '3.2.0.2'
 gem 'sprockets-rails', :require => 'sprockets/railtie'
 #gem "twitter-bootstrap-rails"
+#
+gem 'thin'
 
 
 #uploader
-gem 'carrierwave'
+gem 'carrierwave', github: 'carrierwaveuploader/carrierwave'
+#gem "fog"
+#gem "fog-google"
 
 # Use ActiveModel has_secure_password
 # gem 'bcrypt', '~> 3.1.7'

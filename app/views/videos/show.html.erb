@@ -1,12 +1,5 @@
-<!--
 <video id="vid1" class="video-js vjs-default-skin vjs-big-play-centered" controls width="640" height="464"
-  poster="http://video-js.zencoder.com/oceans-clip.png"
-  data-setup='{ "techOrder": ["youtube"], "src": "http://www.youtube.com/watch?v=xjS6SftYQaQ"}' >
-</video>
--->
-
-<video id="vid1" class="video-js vjs-default-skin vjs-big-play-centered" controls width="640" height="464"
-data-setup='{"techOrder": ["html5"]}'
+data-setup='{"techOrder": ["html5"]}' preload='none'
 >
 <source src="<%= @video.local_remote_url %>" type='video/mp4'>
 </video>
@@ -69,9 +62,20 @@ data-setup='{"techOrder": ["html5"]}'
       removeLoop();
     })
     $(".vjs-playback-rate").removeClass("vjs-hidden");
+    $(".vjs-progress-holder").mousedown(function() {
+      time = mplayer.currentTime();
+      console.log(time);
+      if(mplayer.start_loop >= 0 && mplayer.stop_loop >= 0) {
+        if(time < mplayer.start_loop || time > mplayer.stop_loop) {
+          removeLoop();
+        }
+      }
+    })
   });
   function setloopBetween(start,end) {
     removeLoop();
+    mplayer.start_loop = start;
+    mplayer.stop_loop = end;
     mplayer.addCuepoint({
         namespace: "logger",
         start: start,
@@ -95,6 +99,9 @@ data-setup='{"techOrder": ["html5"]}'
   function removeLoop() {
     mplayer.destroyCuepoints();
     mplayer.cuepoints();
+    mplayer.start_loop = -1;
+    mplayer.stop_loop = -1;
+    console.log("loop removed");
   }
 </script>
 

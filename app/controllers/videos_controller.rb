@@ -1,4 +1,5 @@
 class VideosController < ApplicationController
+  impressionist :action => [:show],:unique => [:session_hash]
 
 
   def index
@@ -8,7 +9,7 @@ class VideosController < ApplicationController
 
   def show
     @video = Video.find(params[:id])
-
+    impressionist(@video)
   end
 
   def new
@@ -41,9 +42,7 @@ class VideosController < ApplicationController
 
   def permiited_params
     params.require(:video).permit(:artist,:description,:name,:local_remote_url)
-
   end
-
 
 end
 

@@ -4,6 +4,9 @@ data-setup='{"techOrder": ["html5"]}' preload='none'
 <source src="<%= @video.local_remote_url %>" type='video/mp4'>
 </video>
 
+<%# if !current_user.voted_for? @video %>
+  <%= link_to "Like",likes_path(video_id: @video.id),method: :post,remote: true %>
+<%# end %>
 
 <div id="fieldSelection">
   <legend> Stages </legend>

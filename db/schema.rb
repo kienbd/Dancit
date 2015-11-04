@@ -148,8 +148,9 @@ ActiveRecord::Schema.define(version: 20151018224507) do
     t.string   "name"
     t.string   "description"
     t.string   "artist"
-    t.datetime "created_at",         null: false
-    t.datetime "updated_at",         null: false
+    t.integer  "impressions_count",  default: 0
+    t.datetime "created_at",                     null: false
+    t.datetime "updated_at",                     null: false
   end
 
   create_table "votes", force: :cascade do |t|

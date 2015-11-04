@@ -17,6 +17,10 @@ Rails.application.routes.draw do
 
   end
 
+  resources :likes,only: [:create] do
+
+  end
+
 
 
   # The priority is based upon order of creation: first created -> highest priority.

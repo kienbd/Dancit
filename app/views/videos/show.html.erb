@@ -8,6 +8,16 @@ data-setup='{"techOrder": ["html5"]}' preload='none'
   <%= link_to "Like",likes_path(video_id: @video.id),method: :post,remote: true %>
 <%# end %>
 
+<%= form_tag comments_path,method: :post, remote: true do %>
+  <%= hidden_field_tag :video_id,@video.id %>
+  <%= text_field_tag :comment %>
+  <%= submit_tag "Comment" %>
+<% end %>
+<div id="comment_holder">
+  <ul style="list-style: none">
+  </ul>
+</div>
+
 <div id="fieldSelection">
   <legend> Stages </legend>
   <div class="button" onclick="setloopBetween(0,5)">Stage 1 </div>

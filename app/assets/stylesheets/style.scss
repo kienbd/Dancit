@@ -1,0 +1,88 @@
+
+
+.navbar-static-top {
+  margin-bottom: 19px;
+}
+
+.carousel-inner .active.left { left: -33%; }
+.carousel-inner .next        { left:  33%; }
+.carousel-inner .prev        { left: -33%; }
+.carousel-control.left,.carousel-control.right {background-image:none;}
+
+/* Sticky footer styles
+-------------------------------------------------- */
+html {
+  position: relative;
+  min-height: 100%;
+}
+body {
+  /* Margin bottom by footer height */
+  margin-bottom: 60px;
+}
+
+.carousel {
+	margin-bottom: 10px;
+}
+
+.footer {
+  position: absolute;
+  bottom: 0;
+  width: 100%;
+  /* Set the fixed height of the footer here */
+  height: 40px;
+  background-color: #f5f5f5;
+}
+
+.footer-text  {
+    margin-top: 10px;
+}
+
+.footer-text a {
+  font-size: 20px;
+  color: #434343;
+  text-decoration: none;
+}
+
+.footer-text a:hover {
+  font-size: 20px;
+  color: black;
+  text-decoration: none;
+}
+
+.sidebar a {
+  font-size: 20px;
+  color: #434343;
+  text-decoration: none;
+}
+
+.sidebar a:hover {
+  font-size: 20px;
+  color: black;
+  text-decoration: none;
+}
+
+.sidebar  ul
+{
+    list-style-type: none;
+}
+
+.sidebar  li
+{
+    margin: 5px;
+}
+
+.vcenter {
+    vertical-align:middle;
+    text-align:center;
+
+}
+
+.glyphicon-user {
+	font-size: 20px;
+	vertical-align:middle;
+	margin-left: 10px;
+}
+
+.sidebar ul {
+  padding-top: 20px;
+}

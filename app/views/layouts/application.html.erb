@@ -9,15 +9,11 @@
   <%= csrf_meta_tags %>
 </head>
 <body>
-  <% if current_user %>
-    <div>
-      <b><%= current_user.username %> </b>
-     | <%= link_to "Sign Out",destroy_user_session_path,method: :delete %>
-    </div>
-  <% else %>
-    <%= link_to "Sign In",new_user_session_path %>
-  <% end %>
-<%= yield %>
+  <%= render partial: "layouts/header" %>
+  <div class="content container">
+    <%= yield %>
+  </div>
+  <%= render partial: "layouts/footer" %>
 
 </body>
 </html>

@@ -2,9 +2,11 @@ class VideosController < ApplicationController
   impressionist :action => [:show],:unique => [:session_hash]
 
   def index
-
+    @videos = Video.all.order(created_at: "desc")
+    respond_to do |format|
+      format.html
+    end
   end
-
 
   def show
     @video = Video.find(params[:id])
@@ -28,7 +30,6 @@ class VideosController < ApplicationController
         end
       }
     end
-
   end
 
 

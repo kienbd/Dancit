@@ -1,0 +1,12 @@
+<% if @user != current_user %>
+  <b> <%= @user.username %> </b>
+  <% if current_user.following? @user%>
+    <div>
+      <%= link_to "unfollow",unfollow_user_path(follow_id: @user.id),method: :delete, remote: true %>
+    </div>
+  <% else %>
+    <div>
+      <%= link_to "follow",follow_user_path(follow_id: @user.id),method: :post, remote: true %>
+    </div>
+  <% end %>
+<% end %>

@@ -1,0 +1,130 @@
+<video id="vid1" class="video-js vjs-default-skin vjs-big-play-centered" controls width="640" height="464"
+data-setup='{"techOrder": ["html5"]}' preload='none'
+>
+<source src="<%= @video.local_remote_url %>" type='video/mp4'>
+</video>
+
+<%# if !current_user.voted_for? @video %>
+  <%= link_to "Like",likes_path(video_id: @video.id),method: :post,remote: true %>
+<%# end %>
+
+<%= form_tag comments_path,method: :post, remote: true do %>
+  <%= hidden_field_tag :video_id,@video.id %>
+  <%= text_field_tag :comment %>
+  <%= submit_tag "Comment" %>
+<% end %>
+<div id="comment_holder">
+  <ul style="list-style: none">
+    <% @video.comments.each do |com| %>
+      <li>
+        <p>
+          <b> <%= com.title %> </b>
+          <br>
+          <span style="margin-left: 10px;"> <%= com.comment %> </span>
+        </p>
+      </li>
+    <% end %>
+  </ul>
+</div>
+
+<div id="fieldSelection">
+  <legend> Stages </legend>
+  <div class="button" onclick="setloopBetween(0,5)">Stage 1 </div>
+  <div class="button" onclick="setloopBetween(5,10)">Stage 2 </div>
+  <div class="button" onclick="setloopBetween(10,15)">Stage 3 </div>
+  <div class="button" onclick="setloopBetween(15,25)">Stage 4 </div>
+  <div class="button" onclick="setloopBetween(25,46)">Stage 5 </div>
+</div>
+
+<script>
+  //Example of options ={hidden:false,locked:true,panel:false}
+  mplayer =videojs("vid1",{
+    controls: true,
+    inactivityTimeout: 0,
+    controlBar: {
+      muteToggle: false,
+    },
+    playbackRates: [0.5, 1, 1.5, 2]
+
+  },function() {
+
+
+  });
+  mplayer.markers({
+    onMarkerReached: function(marker){
+    },
+    markerStyle: {
+      'width':'10px',
+      'background-color': 'red'
+    },
+    markerTip:{
+      display: true,
+      text: function(marker) {
+        return "This is a break: " + marker.text;
+      }
+    },
+    breakOverlay:{
+      display: true,
+      text: function(marker) {
+        return marker.text;
+      }
+    },
+    markers: [
+      {time: 0,   text: "Stage 1"},
+      {time: 5,   text: "Stage 2"},
+      {time: 10,  text: "Stage 3"},
+      {time: 15,  text: "Stage 4"},
+      {time: 25,  text: "Stage 5"},
+      {time: 46,  text: "End"}
+    ]
+  });
+  videojs("vid1").ready(function(){
+    this.cuepoints();
+    $(".vjs-load-progress").on('click',function() {
+      removeLoop();
+    })
+    $(".vjs-playback-rate").removeClass("vjs-hidden");
+    $(".vjs-progress-holder").mousedown(function() {
+      time = mplayer.currentTime();
+      console.log(time);
+      if(mplayer.start_loop >= 0 && mplayer.stop_loop >= 0) {
+        if(time < mplayer.start_loop || time > mplayer.stop_loop) {
+          removeLoop();
+        }
+      }
+    })
+  });
+  function setloopBetween(start,end) {
+    removeLoop();
+    mplayer.start_loop = start;
+    mplayer.stop_loop = end;
+    mplayer.addCuepoint({
+        namespace: "logger",
+        start: start,
+        end: end,
+        onStart: function(params){
+            if(params.error){
+                console.error("Error at second 0");
+            }else{
+                console.log("Log at second 0");
+            }
+        },
+        onEnd: function(params){
+          mplayer.currentTime(start);
+          mplayer.play();
+        },
+        params: {error: false}
+    });
+    mplayer.currentTime(start);
+    mplayer.play();
+  }
+  function removeLoop() {
+    mplayer.destroyCuepoints();
+    mplayer.cuepoints();
+    mplayer.start_loop = -1;
+    mplayer.stop_loop = -1;
+    console.log("loop removed");
+  }
+</script>
+
+

@@ -8,7 +8,7 @@ class ApplicationController < ActionController::Base
     if request.referer == sign_in_url
       super
     else
-      stored_location_for(resource) || request.referer || properties_path(city: session[:city])
+      stored_location_for(resource) || root_path
     end
   end
 

@@ -5,10 +5,30 @@ class Video < ActiveRecord::Base
   has_many :course_video_relationships
   has_many :courses, :through => :course_video_relationships
   has_many :stages
+  accepts_nested_attributes_for :stages
+
+  mount_uploader :local_remote_url, LocalVideoUploader
 
   #view count
-  is_impressionable
+  is_impressionable :counter_cache => true
 
   #like
   acts_as_votable
+
+  #comment
+  acts_as_commentable
+
+
+  #stage
+
+  def source_link
+    if !self.youtube_remote_url.nil?
+      return self.youtube_remote_url
+    elsif !self.s3_remote_url.nil?
+      return self.s3_remote_url
+    elsif !self.local_remote_url.nil?
+      return self.local_remote_url
+    end
+  end
+
 end

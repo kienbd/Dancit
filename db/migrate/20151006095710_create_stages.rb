@@ -4,9 +4,9 @@ class CreateStages < ActiveRecord::Migration
       t.string :name
       t.integer :video_id
       t.integer :image_id
-      t.string :start_at
-      t.string :end_at
-      t.string :thumbnail
+      t.string  :start_at
+      t.string  :end_at
+      t.string  :thumbnail
 
       t.timestamps null: false
     end

@@ -1,0 +1,16 @@
+<div>
+  <%= form_for(@video) do |f| %>
+    <%= f.text_field  :name,placeholder: "Name" %>
+    <%= f.text_area   :description,placeholder: "Description " %>
+    <%= f.file_field  :local_remote_url %>
+    <%= f.fields_for  :stages do |ff| %>
+      <div>
+        <%= ff.text_field :start_at,placeholder: "start at" %>
+        <%= ff.text_field :end_at,placeholder: "end at" %>
+      </div>
+    <% end %>
+    <%= f.submit "Submit" %>
+  <% end %>
+
+
+</div>

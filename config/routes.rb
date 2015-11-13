@@ -7,7 +7,31 @@ Rails.application.routes.draw do
     get 'sign_in', :to => 'devise/sessions#new', :as => :new_user_session
     get 'sign_out', :to => 'devise/sessions#destroy', :as => :destroy_user_session
   end
-  resources :users
+  resources :users do
+    member do
+      post    :follow
+      delete  :unfollow
+      get     :followings
+      get     :followers
+    end
+
+  end
+
+  resources :videos,only: [:index,:show,:create,:new,:edit,:update] do
+
+  end
+
+  resources :courses,only: [:index,:show,:create,:new,:edit,:update] do
+
+  end
+
+  resources :likes,only: [:create] do
+
+  end
+
+  resources :comments,only: [:create,:index] do
+
+  end
 
 
 
@@ -15,7 +39,7 @@ Rails.application.routes.draw do
   # See how all your routes lay out with "rake routes".
 
   # You can have the root of your site routed with "root"
-  root 'welcome#index'
+  root 'videos#new'
 
   # Example of regular route:
   #   get 'products/:id' => 'catalog#view'

@@ -15,6 +15,15 @@ data-setup='{"techOrder": ["html5"]}' preload='none'
 <% end %>
 <div id="comment_holder">
   <ul style="list-style: none">
+    <% @video.comments.each do |com| %>
+      <li>
+        <p>
+          <b> <%= com.title %> </b>
+          <br>
+          <span style="margin-left: 10px;"> <%= com.comment %> </span>
+        </p>
+      </li>
+    <% end %>
   </ul>
 </div>
 

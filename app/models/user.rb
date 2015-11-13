@@ -19,7 +19,7 @@ class User < ActiveRecord::Base
   has_many :passive_fellowships, class_name:  Fellowship,
                                    foreign_key: "followed_id",
                                    dependent:   :destroy
-  has_many :following, through: :active_fellowships,  source: :followed
+  has_many :followings, through: :active_fellowships,  source: :followed
   has_many :followers, through: :passive_fellowships, source: :follower
 
   # vote and like
@@ -44,6 +44,20 @@ class User < ActiveRecord::Base
     # update token
     user.update_attributes({"#{auth.provider[0]}_access_token".to_sym => auth.credentials.token})
     user
+  end
+
+
+  def follow followed_id
+    fellow = Fellowship.create(follower_id: self.id,followed_id: followed_id)
+    fellow.save
+  end
+
+  def unfollow followed_id
+    Fellowship.where(follower_id: self.id,followed_id: followed_id).delete_all
+  end
+
+  def following?(other_user)
+    followings.include?(other_user)
   end
 
 end

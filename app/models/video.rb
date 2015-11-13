@@ -5,6 +5,7 @@ class Video < ActiveRecord::Base
   has_many :course_video_relationships
   has_many :courses, :through => :course_video_relationships
   has_many :stages
+  accepts_nested_attributes_for :stages
 
   mount_uploader :local_remote_url, LocalVideoUploader
 
@@ -16,6 +17,9 @@ class Video < ActiveRecord::Base
 
   #comment
   acts_as_commentable
+
+
+  #stage
 
   def source_link
     if !self.youtube_remote_url.nil?

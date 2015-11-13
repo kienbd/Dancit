@@ -1,7 +1,6 @@
 class VideosController < ApplicationController
   impressionist :action => [:show],:unique => [:session_hash]
 
-
   def index
 
   end
@@ -21,7 +20,7 @@ class VideosController < ApplicationController
   end
 
   def create
-    @video = Video.new(permiited_params)
+    @video = Video.new(permitted_params)
     respond_to do |format|
       format.html {
         if @video.save
@@ -34,14 +33,14 @@ class VideosController < ApplicationController
 
 
   def edit
-
+    @video = Video.find(params[:id])
   end
 
 
   private
 
-  def permiited_params
-    params.require(:video).permit(:artist,:description,:name,:local_remote_url)
+  def permitted_params
+    params.require(:video).permit(:artist,:description,:name,:local_remote_url,:stages_attributes => [:name,:start_at,:end_at])
   end
 
 end

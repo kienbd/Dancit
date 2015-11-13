@@ -6,7 +6,7 @@ class CommentsController < ApplicationController
     elsif params[:course_id]
       resource = Course.find(params[:course_id])
     end
-    @comment = resource.comments.create(title: current_user.name,comment: params[:comment])
+    @comment = resource.comments.create(title: current_user.username,user_id: current_user.id,comment: params[:comment])
     @comment.save
     respond_to do |format|
       format.html

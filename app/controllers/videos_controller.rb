@@ -22,7 +22,7 @@ class VideosController < ApplicationController
   end
 
   def create
-    @video = Video.new(permitted_params)
+    @video = current_user.videos.new(permitted_params)
     respond_to do |format|
       format.html {
         if @video.save
@@ -41,7 +41,7 @@ class VideosController < ApplicationController
   private
 
   def permitted_params
-    params.require(:video).permit(:artist,:description,:name,:local_remote_url,:stages_attributes => [:name,:start_at,:end_at])
+    params.require(:video).permit(:artist,:description,:name,:local_remote_url,:youtube_remote_url,:stages_attributes => [:name,:start_at,:end_at])
   end
 
 end

@@ -1,40 +1,81 @@
-<video id="vid1" class="video-js vjs-default-skin vjs-big-play-centered" controls width="640" height="464"
-data-setup='{"techOrder": ["html5"]}' preload='none'
->
-<source src="<%= @video.local_remote_url %>" type='video/mp4'>
-</video>
+<div class="pull-left">
+  <%= render partial: "player",locals: {video: @video} %>
 
-<%# if !current_user.voted_for? @video %>
-  <%= link_to "Like",likes_path(video_id: @video.id),method: :post,remote: true %>
-<%# end %>
+  <div class="video-controller">
+    <div class="panel-group" id="accordion" role="tablist" aria-multiselectable="true">
+      <div class="panel panel-default">
+        <div class="panel-heading" role="tab" id="headingOne">
+          <h4 class="panel-title">
+            <a role="button" data-toggle="collapse" data-parent="#accordion" href="#collapseOne" aria-expanded="true" aria-controls="collapseOne">
+              Stages
+            </a>
+          </h4>
+        </div>
+        <div id="collapseOne" class="panel-collapse collapse" role="tabpanel" aria-labelledby="headingOne">
+          <div class="panel-body">
+            <div class="button" onclick="setloopBetween(0,5)">Stage 1 </div>
+            <div class="button" onclick="setloopBetween(5,10)">Stage 2 </div>
+            <div class="button" onclick="setloopBetween(10,15)">Stage 3 </div>
+            <div class="button" onclick="setloopBetween(15,25)">Stage 4 </div>
+            <div class="button" onclick="setloopBetween(25,46)">Stage 5 </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
 
-<%= form_tag comments_path,method: :post, remote: true do %>
-  <%= hidden_field_tag :video_id,@video.id %>
-  <%= text_field_tag :comment %>
-  <%= submit_tag "Comment" %>
-<% end %>
-<div id="comment_holder">
-  <ul style="list-style: none">
-    <% @video.comments.each do |com| %>
-      <li>
-        <p>
-          <b> <%= com.title %> </b>
-          <br>
-          <span style="margin-left: 10px;"> <%= com.comment %> </span>
-        </p>
-      </li>
+  <div class="row video-actions-holder">
+
+    <div class="col-sm-12 col-md-8">
+      <div class="video-info pull-left">
+        <h2 style="display: inline-block;margin: 0px"> <%= @video.name %> </h2>
+        <span> by </span>
+        <%= link_to @video.owner.username, user_path(@video.owner) %>
+      </div>
+      <div class="inapp-action pull-left">
+        <% if !current_user.voted_for? @video %>
+          <a href=" <%=likes_path(video_id: @video.id) %>" data-method="post" data-remote="true" >
+            <i class="glyphicon glyphicon-heart"></i>
+          </a>
+        <% end %>
+          100
+        <a href="#"> <i class="glyphicon glyphicon-eye-open"></i> </a>
+        200
+      </div>
+    </div>
+
+    <div class="social-actions col-sm-12 col-md-4 text-right">
+      <a href="#"> <i class="fa fa-facebook-official"></i> </a>
+      <a href="#"> <i class="fa fa-twitter-square"></i> </a>
+    </div>
+  </div>
+  <p style="padding-left: 5px;">
+    <%= @video.description %>
+  </p>
+
+  <hr/>
+  <div class="comment-holder">
+    <h2> Comments </h2>
+    <%= form_tag comments_path,method: :post, remote: true do %>
+      <%= hidden_field_tag :video_id,@video.id %>
+      <div class="form-group col-md-8">
+        <%= text_area_tag :comment,"",class: "form-control",rows: "2" %>
+      </div>
+      <div class="form-group">
+        <button type="submit" class="btn btn-default">Comment</button>
+      </div>
+      <div class="clearfix"></div>
     <% end %>
-  </ul>
+    <div id="comment_holder">
+      <ul style="list-style: none">
+        <% @video.comments.each do |com| %>
+          <%= render partial: "shared/comment",locals: {com: com} %>
+        <% end %>
+      </ul>
+    </div>
+  </div>
 </div>
-
-<div id="fieldSelection">
-  <legend> Stages </legend>
-  <div class="button" onclick="setloopBetween(0,5)">Stage 1 </div>
-  <div class="button" onclick="setloopBetween(5,10)">Stage 2 </div>
-  <div class="button" onclick="setloopBetween(10,15)">Stage 3 </div>
-  <div class="button" onclick="setloopBetween(15,25)">Stage 4 </div>
-  <div class="button" onclick="setloopBetween(25,46)">Stage 5 </div>
-</div>
+<div class="clearfix"></div>
 
 <script>
   //Example of options ={hidden:false,locked:true,panel:false}

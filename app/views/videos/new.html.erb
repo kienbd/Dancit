@@ -1,16 +1,40 @@
-<div>
-  <%= form_for(@video) do |f| %>
-    <%= f.text_field  :name,placeholder: "Name" %>
-    <%= f.text_area   :description,placeholder: "Description " %>
-    <%= f.file_field  :local_remote_url %>
-    <a href="javascript:addStage()"> Add </a>
-    <div id="stages_field"></div>
-    <%= f.submit "Submit" %>
+<!---
+<script src="https://rawgit.com/enyo/dropzone/master/dist/dropzone.js"></script>
+<link rel="stylesheet" href="https://rawgit.com/enyo/dropzone/master/dist/dropzone.css">
+-->
+<div class="mid-form-holder cl-sm-12 col-md-8 col-md-offset-2 col-lg-8 col-lg-offset-2">
+  <h2> Add new Video </h2>
+  <%= form_for @video,html: {class: "form"} do |f| %>
+    <div class="row">
+      <div class="col col-md-6">
+        <div class="form-group">
+          <%= f.text_field  :name,placeholder: "Name",class: 'form-control' %>
+        </div>
+        <div class="form-group">
+          <%= f.text_area   :description,placeholder: "Description",class: "form-control",rows: "5" %>
+        </div>
+      </div>
+      <div class="col col-md-6">
+        <div class="form-group">
+          <div class="dz-default dz-message"><span>Drop files here to upload</span></div>
+          <%= f.file_field  :local_remote_url%>
+        </div>
+        <div class="form-group">
+          <div class="dz-default dz-message"><span>Upload from Youtube</span></div>
+          <%= f.text_field  :youtube_remote_url,class: "form-control",placeholder: "E.g: https://www.youtube.com/watch?v=SzJetR0cLHU"%>
+        </div>
+      </div>
+    </div>
+    <div class="form-group">
+      <%= f.submit "Submit",class: "btn btn-default" %>
+    </div>
   <% end %>
-
-
 </div>
 
+<!--
+    <a href="javascript:addStage()"> Add </a>
+    <div id="stages_field"></div>
+--!>
 
 <script>
   function addStage() {

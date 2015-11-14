@@ -86,3 +86,27 @@ body {
 .sidebar ul {
   padding-top: 20px;
 }
+
+
+.mid-form-holder {
+  padding: 10px;
+  border: 1px solid #cecece;
+  border-radius: 9px;
+  margin-top: 30px;
+  box-shadow: 0px 0px 9px #cecece;
+}
+
+.video-actions-holder {
+  padding-bottom: 10px;
+}
+.inapp-action {
+  padding-left: 20px;
+}
+
+.inapp-action,.social-actions {
+  a {
+    padding-left: 5px;
+    color: black;
+    font-size: 24px;
+  }
+}

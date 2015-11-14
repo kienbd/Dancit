@@ -1,0 +1,12 @@
+<div class="player-holder">
+  <% if video.youtube_remote_url %>
+    <video id="vid1" class="video-js vjs-default-skin vjs-big-play-centered" controls width="860" height="480"
+    data-setup='{ "techOrder": ["youtube"], "sources": [{ "type": "video/youtube", "src": "<%= video.youtube_remote_url %>"}] }'>
+    </video>
+  <% else %>
+    <video id="vid1" class="video-js vjs-default-skin vjs-big-play-centered" controls width="860" height="480"
+    data-setup='{"techorder": ["html5"]}' preload='none'>
+    <source src="<%= video.local_remote_url %>" type='video/mp4'>
+    </video>
+  <% end %>
+</div>

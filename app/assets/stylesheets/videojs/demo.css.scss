@@ -53,9 +53,10 @@ min-width: -webkit-min-content;
     display: block!important;
     margin-left: auto!important;
     margin-right: auto!important;
-    border: none;
+    border: 1px solid #dedede;
     margin-top: 0px;
     margin-bottom: 18px;
+    z-index: 1;
 }
 .title{
 	text-align:center;

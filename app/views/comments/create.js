@@ -1,1 +1,1 @@
-$("#comment_holder ul").append("<li> <%=j @comment.comment %> </li> ");
+$("#comment_holder ul").append("<%=j render partial: 'shared/comment',locals: {com: @comment} %>");

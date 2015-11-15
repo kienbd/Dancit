@@ -19,7 +19,26 @@ class Video < ActiveRecord::Base
   acts_as_commentable
 
 
-  #stage
+  #youtube thumbnail
+  after_save :get_thumbnail
+
+
+  def get_thumbnail
+    if self.thumbnail.nil?
+      if !self.youtube_remote_url.nil? && !self.youtube_remote_url.empty?
+        video_info = VideoInfo.new(self.youtube_remote_url)
+        self.thumbnail = video_info.thumbnail_medium
+      elsif !self.local_remote_url.nil?
+        self.thumbnail = self.local_remote_url.thumb.url
+      end
+      self.save
+    end
+  end
+
+  def thumb
+    self.thumbnail||"assets/assets/video-thumbnail.png"
+
+  end
 
   def source_link
     if !self.youtube_remote_url.nil?
@@ -29,6 +48,14 @@ class Video < ActiveRecord::Base
     elsif !self.local_remote_url.nil?
       return self.local_remote_url
     end
+  end
+
+  def view_count
+    self.impressionist_count
+  end
+
+  def like_count
+    self.get_likes.size
   end
 
 end

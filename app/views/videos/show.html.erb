@@ -37,10 +37,14 @@
           <a href=" <%=likes_path(video_id: @video.id) %>" data-method="post" data-remote="true" >
             <i class="glyphicon glyphicon-heart"></i>
           </a>
+        <% else %>
+          <a href="javascript:;">
+            <i class="glyphicon glyphicon-heart"></i>
+          </a>
         <% end %>
-          100
+        <%= @video.like_count %>
         <a href="#"> <i class="glyphicon glyphicon-eye-open"></i> </a>
-        200
+        <%= @video.view_count %>
       </div>
     </div>
 

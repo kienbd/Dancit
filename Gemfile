@@ -46,6 +46,8 @@ gem 'carrierwave', github: 'carrierwaveuploader/carrierwave'
 gem 'carrierwave-video-thumbnailer'
 #gem "fog"
 #gem "fog-google"
+gem 'video_info'
+
 
 # Use ActiveModel has_secure_password
 # gem 'bcrypt', '~> 3.1.7'

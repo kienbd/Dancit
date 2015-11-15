@@ -4,24 +4,24 @@
     <div class="col-md-12">
       <div class="carousel slide" id="myCarousel">
         <div class="carousel-inner">
-        <div class="item active">
-          <div class="col-md-4"><a href="#"><img src="assets/video-thumbnail.png" class="img-responsive"></a></div>
-        </div>
-        <div class="item">
-          <div class="col-md-4"><a href="#"><img src="assets/video-thumbnail.png" class="img-responsive"></a></div>
-        </div>
-        <div class="item">
-          <div class="col-md-4"><a href="#"><img src="assets/video-thumbnail.png" class="img-responsive"></a></div>
-        </div>
-        <div class="item">
-          <div class="col-md-4"><a href="#"><img src="assets/video-thumbnail.png" class="img-responsive"></a></div>
-        </div>
-        <div class="item">
-          <div class="col-md-4"><a href="#"><img src="assets/video-thumbnail.png" class="img-responsive"></a></div>
-        </div>
-        <div class="item">
-          <div class="col-md-4"><a href="#"><img src="assets/video-thumbnail.png" class="img-responsive"></a></div>
-        </div>
+          <div class="item active">
+            <div class="col-md-4"><a href="#"><img src="assets/video-thumbnail.png" class="img-responsive"></a></div>
+          </div>
+          <div class="item">
+            <div class="col-md-4"><a href="#"><img src="assets/video-thumbnail.png" class="img-responsive"></a></div>
+          </div>
+          <div class="item">
+            <div class="col-md-4"><a href="#"><img src="assets/video-thumbnail.png" class="img-responsive"></a></div>
+          </div>
+          <div class="item">
+            <div class="col-md-4"><a href="#"><img src="assets/video-thumbnail.png" class="img-responsive"></a></div>
+          </div>
+          <div class="item">
+            <div class="col-md-4"><a href="#"><img src="assets/video-thumbnail.png" class="img-responsive"></a></div>
+          </div>
+          <div class="item">
+            <div class="col-md-4"><a href="#"><img src="assets/video-thumbnail.png" class="img-responsive"></a></div>
+          </div>
         </div>
         <a class="left carousel-control" href="#myCarousel" data-slide="prev"><i class="glyphicon glyphicon-chevron-left"></i></a>
         <a class="right carousel-control" href="#myCarousel" data-slide="next"><i class="glyphicon glyphicon-chevron-right"></i></a>
@@ -37,6 +37,19 @@
         <div class="col-sm-12">
           <h3>Most viewed</h3>
         </div>
+        <% @videos.each do |vid| %>
+          <div class="col-sm-6 col-lg-3">
+            <div class="vid-thumb-container">
+              <a href="<%=video_path(vid)%>" >
+                <img src="<%= vid.thumbnail %>" class="img-responsive" alt="thumb">
+                <div>
+                  <span> <%= vid.name %> </span>
+                  <span> <%= vid.view_count %> views </span>
+                </div>
+              </a>
+            </div>
+          </div>
+        <% end%>
         <div class="col-sm-6 col-lg-3">
           <img src="assets/video-thumbnail.png" class="img-responsive" alt="thumb">
         </div>

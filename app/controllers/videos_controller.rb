@@ -23,10 +23,13 @@ class VideosController < ApplicationController
 
   def create
     @video = current_user.videos.new(permitted_params)
+    binding.pry
     respond_to do |format|
       format.html {
         if @video.save
           redirect_to edit_video_path @video
+        else
+          render 'new'
         end
       }
     end

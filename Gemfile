@@ -43,6 +43,7 @@ gem 'thin'
 
 #uploader
 gem 'carrierwave', github: 'carrierwaveuploader/carrierwave'
+gem 'carrierwave-video-thumbnailer'
 #gem "fog"
 #gem "fog-google"
 

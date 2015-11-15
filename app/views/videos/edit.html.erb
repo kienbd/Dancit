@@ -1,16 +1,86 @@
-<div>
-  <%= form_for(@video) do |f| %>
-    <%= f.text_field  :name,placeholder: "Name" %>
-    <%= f.text_area   :description,placeholder: "Description " %>
-    <%= f.file_field  :local_remote_url %>
-    <%= f.fields_for  :stages do |ff| %>
-      <div>
-        <%= ff.text_field :start_at,placeholder: "start at" %>
-        <%= ff.text_field :end_at,placeholder: "end at" %>
-      </div>
-    <% end %>
-    <%= f.submit "Submit" %>
-  <% end %>
-
-
+<h2> Edit Video</h2>
+<div class="pull-left">
+  <%= render partial: "videos/player",locals: {video: @video} %>
 </div>
+<div class="pull-right edit-form-video">
+  <%= form_for @video,html: {class: "form"},:url => { :action => "update" } do |f| %>
+    <div class="col col-md-12">
+      <div class="panel-group" id="accordion" role="tablist" aria-multiselectable="true">
+        <div class="panel panel-default">
+          <div class="panel-heading" role="tab" id="headingOne">
+            <h4 class="panel-title">
+              <a role="button" data-toggle="collapse" data-parent="#accordion" href="#collapseOne" aria-expanded="true" aria-controls="collapseOne">
+                Video Information
+              </a>
+            </h4>
+          </div>
+          <div id="collapseOne" class="panel-collapse collapse" role="tabpanel" aria-labelledby="headingOne">
+            <div class="panel-body">
+              <div class="form-group">
+                <%= f.label  :name %>
+                <%= f.text_field  :name,class: 'form-control' %>
+              </div>
+              <div class="form-group">
+                <%= f.label  :description %>
+                <%= f.text_area   :description,placeholder: "Description",class: "form-control",rows: "5" %>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="col col-md-12">
+      <div class="panel-group" id="accordion" role="tablist" aria-multiselectable="true">
+        <div class="panel panel-default">
+          <div class="panel-heading" role="tab" id="headingTwo">
+            <h4 class="panel-title">
+              <a role="button" data-toggle="collapse" data-parent="#accordion" href="#collapseTwo" aria-expanded="true" aria-controls="collapseTwo">
+                Stages
+              </a>
+            </h4>
+          </div>
+          <div id="collapseTwo" class="panel-collapse collapse in" role="tabpanel" aria-labelledby="headingTwo">
+            <div class="panel-body">
+              <div class="form-group">
+                <div>
+                  <a href="javascript:addStage()"> Add </a>
+                </div>
+                <div id="stages_field">
+                  <%= f.fields_for  :stages do |ff| %>
+                    <div class="stage-field">
+                      <%= ff.hidden_field :id %>
+                      <div>
+                        <%= ff.text_field :name,placeholder: "start at",class: "form-control" %>
+                      </div>
+                      <div class="time-holder" style="margin-right: 2%">
+                        <%= ff.text_field :start_at,placeholder: "start at",class: "form-control" %>
+                      </div
+                      ><div class="time-holder">
+                        <%= ff.text_field :end_at,placeholder: "end at",class: "form-control" %>
+                      </div>
+                    </div>
+                    <div>
+                    </div>
+                  <% end %>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="form-group" style="padding: 0px 15px">
+      <%= f.submit "Submit",class: "btn btn-default btn-block" %>
+    </div>
+  <% end %>
+  <div class="clearfix"></div>
+</div>
+
+
+<script>
+  function addStage() {
+    $("#stages_field").append("<%=j render partial: 'stage_attribute'%>");
+    $($(".stage-field")[$(".stage-field").length-1]).attr("id","stage-num-" + ($(".stage-field").length -1).toString());
+  }
+</script>
+

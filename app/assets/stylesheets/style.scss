@@ -110,3 +110,24 @@ body {
     font-size: 24px;
   }
 }
+.container {
+  padding-right: 0px;
+  padding-left: 0px;
+}
+
+.time-holder {
+  margin-top: 2px;
+  width: 49%;
+  display: inline-block;
+}
+
+.edit-form-video {
+  width: 310px;
+}
+.stage-field {
+  padding: 5px;
+  margin-top: 5px;
+  background: #E6E6E6;
+  border-radius: 5px;
+  border: 1px solid rgba(226, 224, 224, 0.87);
+}

@@ -26,7 +26,7 @@ class VideosController < ApplicationController
     respond_to do |format|
       format.html {
         if @video.save
-          redirect_to @video
+          redirect_to edit_video_path @video
         end
       }
     end
@@ -35,6 +35,21 @@ class VideosController < ApplicationController
 
   def edit
     @video = Video.find(params[:id])
+  end
+
+  def update
+    @video = Video.find(params[:id])
+    @res = @video.update_attributes(permitted_params)
+    respond_to do |format|
+      format.html {
+        if @res
+          redirect_to @video
+        else
+          render 'edit'
+        end
+      }
+      format.js
+    end
   end
 
 

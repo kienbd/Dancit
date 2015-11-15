@@ -40,7 +40,7 @@
         <% @videos.each do |vid| %>
           <div class="col-sm-6 col-lg-3">
             <div class="vid-thumb-container">
-              <a href="<%=video_path(vid)%>" >
+              <a href="<%=video_path(vid)%>" data-method="get" >
                 <img src="<%= vid.thumbnail %>" class="img-responsive" alt="thumb">
                 <div>
                   <span> <%= vid.name %> </span>

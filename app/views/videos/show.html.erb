@@ -13,11 +13,9 @@
         </div>
         <div id="collapseOne" class="panel-collapse collapse" role="tabpanel" aria-labelledby="headingOne">
           <div class="panel-body">
-            <div class="button" onclick="setloopBetween(0,5)">Stage 1 </div>
-            <div class="button" onclick="setloopBetween(5,10)">Stage 2 </div>
-            <div class="button" onclick="setloopBetween(10,15)">Stage 3 </div>
-            <div class="button" onclick="setloopBetween(15,25)">Stage 4 </div>
-            <div class="button" onclick="setloopBetween(25,46)">Stage 5 </div>
+            <% @video.stages.each do |stage| %>
+              <div class="btn btn-default" data-toggle="button" aria-pressed="false" onclick="checkloopBetween(<%= stage.start_at%>,<%= stage.end_at%>)"><%= stage.name %></div>
+            <% end %>
           </div>
         </div>
       </div>
@@ -82,63 +80,64 @@
 <div class="clearfix"></div>
 
 <script>
-  //Example of options ={hidden:false,locked:true,panel:false}
-  mplayer =videojs("vid1",{
-    controls: true,
-    inactivityTimeout: 0,
-    controlBar: {
-      muteToggle: false,
-    },
-    playbackRates: [0.5, 1, 1.5, 2]
+  $(document).ready(ready);
+  $(document).on('page:load', ready);
+  var ready = function() {
+    mplayer =videojs("vid1",{
+      controls: true,
+      inactivityTimeout: 0,
+      controlBar: {
+        muteToggle: false,
+      },
+      playbackRates: [0.5, 1, 1.5, 2]
 
-  },function() {
+    },function() {
 
 
-  });
-  mplayer.markers({
-    onMarkerReached: function(marker){
-    },
-    markerStyle: {
-      'width':'10px',
-      'background-color': 'red'
-    },
-    markerTip:{
-      display: true,
-      text: function(marker) {
-        return "This is a break: " + marker.text;
-      }
-    },
-    breakOverlay:{
-      display: true,
-      text: function(marker) {
-        return marker.text;
-      }
-    },
-    markers: [
-      {time: 0,   text: "Stage 1"},
-      {time: 5,   text: "Stage 2"},
-      {time: 10,  text: "Stage 3"},
-      {time: 15,  text: "Stage 4"},
-      {time: 25,  text: "Stage 5"},
-      {time: 46,  text: "End"}
-    ]
-  });
-  videojs("vid1").ready(function(){
-    this.cuepoints();
-    $(".vjs-load-progress").on('click',function() {
-      removeLoop();
-    })
-    $(".vjs-playback-rate").removeClass("vjs-hidden");
-    $(".vjs-progress-holder").mousedown(function() {
-      time = mplayer.currentTime();
-      console.log(time);
-      if(mplayer.start_loop >= 0 && mplayer.stop_loop >= 0) {
-        if(time < mplayer.start_loop || time > mplayer.stop_loop) {
-          removeLoop();
+    });
+    mplayer.markers({
+      onMarkerReached: function(marker){
+      },
+      markerStyle: {
+        'width':'10px',
+        'background-color': 'red'
+      },
+      markerTip:{
+        display: true,
+        text: function(marker) {
+          return "This is a break: " + marker.text;
         }
-      }
-    })
-  });
+      },
+      breakOverlay:{
+        display: true,
+        text: function(marker) {
+          return marker.text;
+        }
+      },
+      markers: [
+      <% @video.stages.each do |stage| %>
+        {time: <%=stage.start_at%>,text: "<%=stage.name %>"},
+        {time: <%=stage.end_at%>,text: "<%=stage.name %> ends"},
+      <% end %>
+      ]
+    });
+    videojs("vid1").ready(function(){
+      this.cuepoints();
+      $(".vjs-load-progress").on('click',function() {
+        removeLoop();
+      })
+      $(".vjs-playback-rate").removeClass("vjs-hidden");
+      $(".vjs-progress-holder").mousedown(function() {
+        time = mplayer.currentTime();
+        console.log(time);
+        if(mplayer.start_loop >= 0 && mplayer.stop_loop >= 0) {
+          if(time < mplayer.start_loop || time > mplayer.stop_loop) {
+            removeLoop();
+          }
+        }
+      })
+    });
+  }
   function setloopBetween(start,end) {
     removeLoop();
     mplayer.start_loop = start;
@@ -161,6 +160,7 @@
         params: {error: false}
     });
     mplayer.currentTime(start);
+    mplayer.segment_looping=true;
     mplayer.play();
   }
   function removeLoop() {
@@ -168,7 +168,14 @@
     mplayer.cuepoints();
     mplayer.start_loop = -1;
     mplayer.stop_loop = -1;
+    mplayer.segment_looping = false;
     console.log("loop removed");
+  }
+  function checkloopBetween(start,end) {
+    if(mplayer.segment_looping)
+      removeLoop();
+    else
+      setloopBetween(start,end);
   }
 </script>
 

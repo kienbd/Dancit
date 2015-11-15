@@ -77,67 +77,81 @@
     </div>
   </div>
 </div>
+<div class="pull-right sidebar-video-holder" style="width: 310px">
+  <h3> Related Videos </h3>
+  <ul class="sidebar-video-list">
+    <% 5.times do |i| %>
+    <li>
+      <div class="col-md-6">
+        <img src="/assets/video-thumbnail.png" class="img-responsive">
+      </div>
+      <div class="col-md-6" style="padding: 0px;">
+        <h4 style="margin-bottom: 0px;"> Video name </h4>
+        <a href="#"> Author </a>
+        <div> 10000 views</div>
+      </div>
+      <div class="clearfix"></div>
+    </li>
+    <% end %>
+  </ul>
+</div>
 <div class="clearfix"></div>
 
 <script>
-  $(document).ready(ready);
-  $(document).on('page:load', ready);
-  var ready = function() {
-    mplayer =videojs("vid1",{
-      controls: true,
-      inactivityTimeout: 0,
-      controlBar: {
-        muteToggle: false,
-      },
-      playbackRates: [0.5, 1, 1.5, 2]
+  mplayer =videojs("vid1",{
+    controls: true,
+    inactivityTimeout: 0,
+    controlBar: {
+      muteToggle: false,
+    },
+    playbackRates: [0.5, 1, 1.5, 2]
 
-    },function() {
+  },function() {
 
 
-    });
-    mplayer.markers({
-      onMarkerReached: function(marker){
-      },
-      markerStyle: {
-        'width':'10px',
-        'background-color': 'red'
-      },
-      markerTip:{
-        display: true,
-        text: function(marker) {
-          return "This is a break: " + marker.text;
+  });
+  mplayer.markers({
+    onMarkerReached: function(marker){
+    },
+    markerStyle: {
+      'width':'10px',
+      'background-color': 'red'
+    },
+    markerTip:{
+      display: true,
+      text: function(marker) {
+        return "This is a break: " + marker.text;
+      }
+    },
+    breakOverlay:{
+      display: true,
+      text: function(marker) {
+        return marker.text;
+      }
+    },
+    markers: [
+    <% @video.stages.each do |stage| %>
+      {time: <%=stage.start_at%>,text: "<%=stage.name %>"},
+      {time: <%=stage.end_at%>,text: "<%=stage.name %> ends"},
+    <% end %>
+    ]
+  });
+  videojs("vid1").ready(function(){
+    this.cuepoints();
+    $(".vjs-load-progress").on('click',function() {
+      removeLoop();
+    })
+    $(".vjs-playback-rate").removeClass("vjs-hidden");
+    $(".vjs-progress-holder").mousedown(function() {
+      time = mplayer.currentTime();
+      console.log(time);
+      if(mplayer.start_loop >= 0 && mplayer.stop_loop >= 0) {
+        if(time < mplayer.start_loop || time > mplayer.stop_loop) {
+          removeLoop();
         }
-      },
-      breakOverlay:{
-        display: true,
-        text: function(marker) {
-          return marker.text;
-        }
-      },
-      markers: [
-      <% @video.stages.each do |stage| %>
-        {time: <%=stage.start_at%>,text: "<%=stage.name %>"},
-        {time: <%=stage.end_at%>,text: "<%=stage.name %> ends"},
-      <% end %>
-      ]
-    });
-    videojs("vid1").ready(function(){
-      this.cuepoints();
-      $(".vjs-load-progress").on('click',function() {
-        removeLoop();
-      })
-      $(".vjs-playback-rate").removeClass("vjs-hidden");
-      $(".vjs-progress-holder").mousedown(function() {
-        time = mplayer.currentTime();
-        console.log(time);
-        if(mplayer.start_loop >= 0 && mplayer.stop_loop >= 0) {
-          if(time < mplayer.start_loop || time > mplayer.stop_loop) {
-            removeLoop();
-          }
-        }
-      })
-    });
-  }
+      }
+    })
+  });
   function setloopBetween(start,end) {
     removeLoop();
     mplayer.start_loop = start;

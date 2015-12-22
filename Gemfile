@@ -28,7 +28,7 @@ gem 'mysql2', '~> 0.3.18'
 
 # Untilities
 gem 'execjs'
-gem 'pry'
+gem 'pry-rails'
 gem "therubyracer"
 gem "will_paginate"
 
@@ -73,6 +73,10 @@ gem 'impressionist'
 
 # like/vote
 gem 'acts_as_votable'
+
+#social
+gem 'social-share-button', '~> 0.1.6'
+
 
 
 group :development, :test do

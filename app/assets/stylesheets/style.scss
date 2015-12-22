@@ -49,6 +49,11 @@ body {
   text-decoration: none;
 }
 
+.sidebar {
+  padding: 0px;
+  border-left: 1px solid #dedede;
+}
+
 .sidebar a {
   font-size: 20px;
   color: #434343;
@@ -61,14 +66,19 @@ body {
   text-decoration: none;
 }
 
-.sidebar  ul
-{
-    list-style-type: none;
+.sidebar ul {
+  padding-top: 0px !important;
 }
 
-.sidebar  li
-{
-    margin: 5px;
+.sidebar > ul {
+  padding: 0px;
+  list-style-type: none;
+}
+
+.sidebar  li {
+  margin: 5px;
+  padding: 15px;
+  border-bottom: 1px solid #dedede;
 }
 
 .vcenter {
@@ -194,4 +204,10 @@ body {
 
 .loop-background {
   background: red -50% 0 repeat !important ;
+}
+.navbar-toggle{
+  z-index:10;
+}
+.slider.slider-horizontal {
+  width: 100%;
 }

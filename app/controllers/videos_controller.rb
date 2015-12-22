@@ -2,7 +2,9 @@ class VideosController < ApplicationController
   impressionist :action => [:show],:unique => [:session_hash]
 
   def index
-    @videos = Video.all.order(created_at: "desc")
+    @videos = Video.order(created_at: "desc").limit(8)
+    @most_viewed_videos = Video.order(impressions_count: "desc").limit(8)
+    @most_liked_videos = Video.order(cached_votes_up: "desc").limit(8)
     respond_to do |format|
       format.html
     end
@@ -17,7 +19,6 @@ class VideosController < ApplicationController
     @video = Video.new
     respond_to do |format|
       format.html
-
     end
   end
 
@@ -58,7 +59,7 @@ class VideosController < ApplicationController
   private
 
   def permitted_params
-    params.require(:video).permit(:artist,:description,:name,:local_remote_url,:youtube_remote_url,:stages_attributes => [:name,:start_at,:end_at])
+    params.require(:video).permit(:artist,:description,:name,:local_remote_url,:youtube_remote_url,:stages_attributes => [:id,:name,:start_at,:end_at])
   end
 
 end

@@ -15,3 +15,6 @@
 //= require bootstrap.min
 //= require_tree ./videojs/.
 //= require turbolinks
+//= require bootstrap-slider
+//= require social-share-button
+

@@ -18,7 +18,6 @@ class Video < ActiveRecord::Base
   #comment
   acts_as_commentable
 
-
   #youtube thumbnail
   after_save :get_thumbnail
 
@@ -27,8 +26,7 @@ class Video < ActiveRecord::Base
     if self.thumbnail.nil?
       if !self.youtube_remote_url.nil? && !self.youtube_remote_url.empty?
         video_info = VideoInfo.new(self.youtube_remote_url)
-        self.thumbnail = video_info.thumbnail_medium
-      elsif !self.local_remote_url.nil?
+        self.thumbnail = video_info.thumbnail_medium elsif !self.local_remote_url.nil?
         self.thumbnail = self.local_remote_url.thumb.url
       end
       self.save
@@ -37,7 +35,6 @@ class Video < ActiveRecord::Base
 
   def thumb
     self.thumbnail||"assets/assets/video-thumbnail.png"
-
   end
 
   def source_link
@@ -59,7 +56,7 @@ class Video < ActiveRecord::Base
 	end
 
   def view_count
-    self.impressionist_count
+    self.impressionist_count(:filter=>:ip_address)
   end
 
   def like_count

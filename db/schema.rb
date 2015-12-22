@@ -148,9 +148,16 @@ ActiveRecord::Schema.define(version: 20151018224507) do
     t.string   "name"
     t.string   "description"
     t.string   "artist"
-    t.integer  "impressions_count",  default: 0
-    t.datetime "created_at",                     null: false
-    t.datetime "updated_at",                     null: false
+    t.integer  "cached_votes_total",      default: 0
+    t.integer  "cached_votes_score",      default: 0
+    t.integer  "cached_votes_up",         default: 0
+    t.integer  "cached_votes_down",       default: 0
+    t.integer  "cached_weighted_score",   default: 0
+    t.integer  "cached_weighted_total",   default: 0
+    t.float    "cached_weighted_average", default: 0.0
+    t.integer  "impressions_count",       default: 0
+    t.datetime "created_at",                            null: false
+    t.datetime "updated_at",                            null: false
   end
 
   create_table "votes", force: :cascade do |t|

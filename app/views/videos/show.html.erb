@@ -4,7 +4,10 @@
   <div class="video-controller">
 		<div class="controllers" style="margin-bottom: 10px;">
 			<div class="btn btn-info" data-toggle="button" aria-pressed="fasle" onclick="rotateVideo()"> Mirror Play </div>
-			<div class="btn btn-danger" data-toggle="button" aria-pressed="fasle" onclick="checkloopBetween(0,44)"> Loop </div>
+			<div class="btn btn-danger loop-btn " data-toggle="button" aria-pressed="fasle" onclick="checkCurrentLoop()" >
+        <span id="current-stage" style="color: white">Loop</span>
+      <i class="fa fa-circle-o-notch"></i>
+      </div>
 		</div>
     <div class="panel-group" id="accordion" role="tablist" aria-multiselectable="true">
       <div class="panel panel-default">
@@ -17,8 +20,13 @@
         </div>
         <div id="collapseOne" class="panel-collapse collapse" role="tabpanel" aria-labelledby="headingOne">
           <div class="panel-body">
+            <script> var all_loops = [];</script>
             <% @video.stages.each do |stage| %>
-							<div class="btn btn-default btn-stage" data-toggle="button" aria-pressed="false" onclick='checkloopBetween(<%= stage.start_at%>,<%= stage.end_at%>)'><%= stage.name %></div>
+							<div class="btn btn-default btn-stage" data-toggle="button" aria-pressed="false"
+                   onclick='checkloopBetween(this,<%= stage.start_at%>,<%= stage.end_at%>,"<%= stage.name %>")'><%= stage.name %></div>
+              <script>
+                all_loops.push([<%=stage.start_at%>,<%=stage.end_at %>,"<%=stage.name%>"]);
+              </script>
             <% end %>
           </div>
         </div>
@@ -51,8 +59,7 @@
     </div>
 
     <div class="social-actions col-sm-12 col-md-4 text-right">
-      <a href="#"> <i class="fa fa-facebook-official"></i> </a>
-      <a href="#"> <i class="fa fa-twitter-square"></i> </a>
+      <%= social_share_button_tag("Dancit",:url => APP_CONFIG["location"] + video_path(@video),:popup => true) %>
     </div>
   </div>
   <p style="padding-left: 5px;">
@@ -149,12 +156,11 @@
     })
     $(".vjs-playback-rate").removeClass("vjs-hidden");
     $(".vjs-progress-holder").mousedown(function() {
-      time = mplayer.currentTime();
-      console.log(time);
       if(mplayer.start_loop >= 0 && mplayer.stop_loop >= 0) {
-        if(time < mplayer.start_loop || time > mplayer.stop_loop) {
           removeLoop();
-        }
+          $(".loop-btn").removeClass('active');
+          $(".btn-stage").removeClass('active');
+          $(".loop-btn i.fa").removeClass("fa-spin");
       }
 		});
   });
@@ -170,7 +176,6 @@
             if(params.error){
                 console.error("Error at second 0");
             }else{
-                console.log("Log at second 0");
             }
         },
         onEnd: function(params){
@@ -179,6 +184,7 @@
         },
         params: {error: false}
     });
+    console.log('loop between: ' + start + ":" + end);
     mplayer.currentTime(start);
     mplayer.segment_looping=true;
     mplayer.play();
@@ -189,13 +195,26 @@
     mplayer.start_loop = -1;
     mplayer.stop_loop = -1;
     mplayer.segment_looping = false;
+    $("#current-stage").html("Loop");
     console.log("loop removed");
   }
-  function checkloopBetween(start,end) {
-    if(mplayer.segment_looping)
-      removeLoop();
-    else
+  function checkloopBetween(e,start,end,name) {
+    if ($(e).hasClass('active')) {
+      console.log(456);
+      if(mplayer.segment_looping) {
+        $(".loop-btn").removeClass("active");
+        $(".loop-btn i.fa").removeClass("fa-spin");
+        $("#current-stage").html("Loop");
+        removeLoop();
+      }
+    } else {
+      console.log('123');
       setloopBetween(start,end);
+      $(".loop-btn").addClass("active");
+      $(".loop-btn i.fa").addClass("fa-spin");
+      $(".btn-stage.active").removeClass("active");
+      $("#current-stage").html(name);
+    }
   }
 	function rotateVideo() {
 		if(mplayer.rotating) {
@@ -215,6 +234,25 @@
 			<% end %>
 		}
 	}
+  var checkCurrentLoop = function() {
+    if($(".loop-btn").hasClass('active')) {
+      removeLoop();
+      $(".btn-stage").removeClass('active');
+      $(".loop-btn i.fa").removeClass("fa-spin");
+    } else {
+      var current = mplayer.currentTime();
+      $.each(all_loops,function(i,e) {
+        if( e[0] <= current  && e[1] >= current) {
+          setloopBetween(e[0],e[1]);
+          $("#current-stage").html(e[2]);
+          $(".btn-stage:contains('" + e[2]+ "')").addClass('active');
+          $(".loop-btn i.fa").addClass("fa-spin");
+          return false;
+        }
+        return true;
+      });
+    }
+  }
 </script>
 
 

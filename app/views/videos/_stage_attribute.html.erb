@@ -2,10 +2,21 @@
   <div>
     <input placeholder="name" type="text" name="video[stages_attributes][][name]" class="form-control">
   </div>
-  <div class="time-holder" style="margin-right: 2%">
-    <input placeholder="start at" type="text" name="video[stages_attributes][][start_at]" class="form-control">
+  <div class="time-holder start" style="margin-right: 2%">
+    <div class="input-group">
+      <input placeholder="start at" type="text" name="video[stages_attributes][][start_at]" class="form-control">
+      <span class="input-group-btn">
+        <button class="btn btn-default get-time-btn" type="button" onclick="getTime(this,'start')"><i class="fa fa-play"></i></button>
+      </span>
+    </div>
   </div
-  ><div class="time-holder">
-    <input placeholder="end at" type="text" name="video[stages_attributes][][end_at]" class="form-control">
+  ><div class="time-holder end">
+    <div class="input-group">
+      <input placeholder="end at" type="text" name="video[stages_attributes][][end_at]" class="form-control">
+        <span class="input-group-btn">
+          <button class="btn btn-default get-time-btn" type="button" onclick="getTime(this,'end')"><i class="fa fa-play"></i></button>
+        </span>
+    </div>
   </div>
+  <div> <a class="btn btn-default btn-block" onclick="getSlider(this)"> Get Slider</a></div>
 </div>

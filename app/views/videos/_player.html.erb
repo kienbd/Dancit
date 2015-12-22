@@ -8,7 +8,7 @@
   <% else %>
     <video id="vid1" class="video-js vjs-default-skin vjs-big-play-centered" controls width="<%=vwidth%>" height="<%=vheight%>"
     poster="<%=video.thumbnail%>"
-    data-setup='{"techorder": ["html5"]}' preload='none'>
+		data-setup='{"techorder": ["html5"],"rotate": "90", "zoom": "1.5"}'  preload='none'>
     <source src="<%= video.local_remote_url %>" type='video/mp4'>
     </video>
   <% end %>

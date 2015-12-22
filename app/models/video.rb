@@ -50,6 +50,14 @@ class Video < ActiveRecord::Base
     end
   end
 
+	def from_youtube?
+		return !self.youtube_remote_url.nil? && !self.youtube_remote_url.empty?
+	end
+
+	def from_local?
+		return !self.local_remote_url.nil?
+	end
+
   def view_count
     self.impressionist_count
   end

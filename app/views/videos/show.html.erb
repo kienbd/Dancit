@@ -71,6 +71,7 @@
 
     <div class="social-actions col-sm-12 col-md-4 text-right">
       <%= social_share_button_tag("Dancit",
+                                  :url => APP_CONFIG["location"] + video_path(@video),
                                   :popup => true,
                                   :desc => @video.name + " - " + @video.description,
                                   :image => @video.thumbnail

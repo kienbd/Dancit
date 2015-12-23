@@ -13,7 +13,6 @@
 //= require jquery
 //= require jquery_ujs
 //= require bootstrap.min
-//= require video
 //= require_tree ./videojs/.
 //= require turbolinks
 //= require bootstrap-slider

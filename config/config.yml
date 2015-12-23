@@ -1,5 +1,5 @@
 development: &base
-  location: "http://example.com"
+  location: "https://dancit.herokuapp.com/"
   fb:
     fb_id: "168713963471223"
     fb_secret: "5806bbbd6ca8047103b24f2e1c706542"

@@ -1,8 +1,7 @@
 <%= content_for(:fb_head) do %>
   <meta property="og:title" content="Dancing video <%= @video.name %>"  />
   <meta property="og:image" content="<%= @video.thumbnail%>" />
-  <meta property="og:url" content="<%= APP_CONFIG["location"] + video_path(@video) %>" />
-  <meta property="og:description" content=" <%= @video.description %> " />
+  <meta property="og:description" content=" A video about <%= @video.description %> " />
 <% end %>
 <div class="col col-md-9 col-sm-12">
   <%= render partial: "player",locals: {video: @video} %>

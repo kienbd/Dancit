@@ -10,6 +10,9 @@ class Video < ActiveRecord::Base
 
   mount_uploader :local_remote_url, LocalVideoUploader
 
+  validates :name,presence:  true
+  validates :category_id,presence: true
+
   #view count
   is_impressionable :counter_cache => true
 

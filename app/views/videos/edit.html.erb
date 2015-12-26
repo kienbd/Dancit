@@ -7,6 +7,9 @@
   <div class="clear clear-fix"></div>
 </div>
 <div class="col col-md-4 col-sm-12 edit-form-video">
+  <div class="bg-danger" style="margin-bottom: 10px">
+    <%= @video.errors.full_messages.first if @video.errors.any? %>
+  </div>
   <%= form_for @video,html: {class: "form"},:url => { :action => "update" } do |f| %>
     <div class="col col-md-12">
       <div class="panel-group" id="accordion" role="tablist" aria-multiselectable="true">

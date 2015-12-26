@@ -10,9 +10,18 @@ class VideosController < ApplicationController
     end
   end
 
+  def recent
+    @videos = Video.order(created_at: "desc").paginate(:page => params[:page],per_page: APP_CONFIG['per_page'])
+  end
+
+  def hot
+    @videos = Video.order(cached_votes_up: "desc").paginate(:page => params[:page],per_page: APP_CONFIG['per_page'])
+  end
+
   def show
     @video = Video.find(params[:id])
     @related_videos = @video.related_videos
+    @comment = @video.comments.recent
     impressionist(@video)
   end
 
@@ -60,7 +69,7 @@ class VideosController < ApplicationController
   private
 
   def permitted_params
-    params.require(:video).permit(:artist,:description,:name,:local_remote_url,:youtube_remote_url,:stages_attributes => [:id,:name,:start_at,:end_at])
+    params.require(:video).permit(:artist,:description,:name,:local_remote_url,:youtube_remote_url,:category_id,:stages_attributes => [:id,:name,:start_at,:end_at])
   end
 
 end

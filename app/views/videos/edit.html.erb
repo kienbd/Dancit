@@ -1,12 +1,12 @@
 <h2> Edit Video</h2>
-<div class="pull-left">
+<div class="col col-md-8 col-sm-12" style="margin-bottom: 10px">
   <%= render partial: "videos/player",locals: {video: @video} %>
   <div style="margin-left: 5px;">
     <input id="ex2" type="text" class="span2"  style="width: 100%"/>
   </div>
   <div class="clear clear-fix"></div>
 </div>
-<div class="pull-right edit-form-video">
+<div class="col col-md-4 col-sm-12 edit-form-video">
   <%= form_for @video,html: {class: "form"},:url => { :action => "update" } do |f| %>
     <div class="col col-md-12">
       <div class="panel-group" id="accordion" role="tablist" aria-multiselectable="true">
@@ -27,6 +27,10 @@
               <div class="form-group">
                 <%= f.label  :description %>
                 <%= f.text_area   :description,placeholder: "Description",class: "form-control",rows: "5" %>
+              </div>
+              <div class="form-group">
+                <%= f.label :category %>
+                <%= f.select :category_id,Category.all.map{|m| [m.name,m.id]},{},class: "form-control" %>
               </div>
             </div>
           </div>
@@ -94,16 +98,22 @@
 
 
 <script>
-  $(window).load(function() {
-    var mplayer = videojs("vid1");
-    $("#ex2").slider({
-      min: 0,
-      max: mplayer.duration(),
-      range: true,
-      value: [0,10],
-      step: 1,
-      focus: true
-    });
+  $(document).ready(function() {
+    var timer = window.setInterval(function(t){
+      var mplayer = videojs("vid1");
+      var max = mplayer.duration();
+      if (max > 0) {
+        $("#ex2").slider({
+          min: 0,
+          max: max,
+          range: true,
+          value: [0,30],
+          step: 1,
+          focus: true
+        });
+        clearInterval(timer);
+      }
+    },500);
   })
   var getTime = function(e,tp) {
     $(e).parents('.stage-field').find(".time-holder." + tp + " input").val(videojs('vid1').currentTime())

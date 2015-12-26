@@ -25,55 +25,29 @@
           <h3>Most viewed</h3>
         </div>
         <% @most_viewed_videos.each do |vid| %>
-          <div class="col-sm-6 col-lg-3">
-            <div class="vid-thumb-container">
-              <a href="<%=video_path(vid)%>" data-method="get" >
-                <img src="<%= vid.thumbnail %>" class="img-responsive" alt="thumb">
-                <div>
-                  <h4 style="margin: 5px 0px 0px 0px"> <%= vid.name %> </h4>
-                  <span>  by  <%= vid.owner.username %></span>
-                  <span> <%= vid.view_count %> views </span>
-                </div>
-              </a>
-            </div>
-          </div>
+          <%= render partial: "vid_thumb",locals: {vid: vid} %>
         <% end%>
       </div>
-     <h5 class="text-right"> <a href="#"> Show more </a></h5>
-
+     <h5 class="text-right"> <a href="<%= recent_videos_path %>"> Show more </a></h5>
       <div class="row" style="margin-top: 40px">
         <div class="col-sm-12">
           <h3>Best rated</h3>
         </div>
         <% @most_liked_videos.each do |vid| %>
-            <div class="col-sm-6 col-lg-3">
-              <div class="vid-thumb-container">
-                <a href="<%=video_path(vid)%>" data-method="get" >
-                  <img src="<%= vid.thumbnail %>" class="img-responsive" alt="thumb">
-                  <div>
-                    <h4 style="margin: 5px 0px 0px 0px"> <%= vid.name %> </h4>
-                    <span>  by  <%= vid.owner.username %></span>
-                    <span> <%= vid.view_count %> views </span>
-                  </div>
-                </a>
-              </div>
-            </div>
+            <%= render partial: "vid_thumb",locals: {vid: vid} %>
         <% end%>
       </div>
-      <h5 class="text-right"> <a href="#"> Show more </a></h5>
+      <h5 class="text-right"> <a href="<%= hot_videos_path %>"> Show more </a></h5>
 		</div>
 		<div class="col-sm-3 sidebar">
 			<ul>
-				<li><a href="#"><span class="glyphicon glyphicon-facetime-video"></span> Lessons</a></li>
-				<li><a href="#"><span class="glyphicon glyphicon-list"></span> Courses</a></li>
+				<li><a href="<%= videos_path %>"><span class="glyphicon glyphicon-facetime-video"></span> Lessons</a></li>
+				<li><a href="<%= courses_path %>"><span class="glyphicon glyphicon-list"></span> Courses</a></li>
 				<li><a href="#"><span class="glyphicon glyphicon-star"></span> Styles</a></li>
 				<ul>
-					<li><a href="#">Hip-hop</a></li>
-					<li><a href="#">Jazz</a></li>
-					<li><a href="#">Locking</a></li>
-					<li><a href="#">K-pop</a></li>
-					<li><a href="#">Popin</a></li>
-					<li><a href="#">Breaking</a></li>
+          <% Category.all.each do |cat| %>
+            <li><a href="<%= category_path(cat)%>"><%= cat.name.capitalize %></a></li>
+          <% end %>
 				</ul>
 			</ul>
 		</div>

@@ -1,15 +1,17 @@
-<% vwidth ||= 860 %>
-<% vheight ||= 480 %>
-<div class="player-holder">
-  <% if !video.youtube_remote_url.nil? && !video.youtube_remote_url.empty? %>
-    <video id="vid1" class="video-js vjs-default-skin vjs-big-play-centered" controls width="<%= vwidth%>" height="<%=vheight%>"
-    data-setup='{ "techOrder": ["youtube"], "sources": [{ "type": "video/youtube", "src": "<%= video.youtube_remote_url %>"}] }'>
-    </video>
-  <% else %>
-    <video id="vid1" class="video-js vjs-default-skin vjs-big-play-centered" controls width="<%=vwidth%>" height="<%=vheight%>"
-    poster="<%=video.thumbnail%>"
-		data-setup='{"techorder": ["html5"],"rotate": "90", "zoom": "1.5"}'  preload='none'>
-    <source src="<%= video.local_remote_url %>" type='video/mp4'>
-    </video>
-  <% end %>
+<% vwidth ||= "auto" %>
+<% vheight ||= "auto" %>
+<div class="wrapper">
+  <div class="videocontent" style="width: 100%">
+      <% if !video.youtube_remote_url.nil? && !video.youtube_remote_url.empty? %>
+          <video id="vid1" class="video-js vjs-default-skin vjs-big-play-centered" controls width="<%= vwidth%>" height="<%=vheight%>"
+                 data-setup='{ "techOrder": ["youtube"], "sources": [{ "type": "video/youtube", "src": "<%= video.youtube_remote_url %>"}] }'>
+          </video>
+      <% else %>
+          <video id="vid1" class="video-js vjs-default-skin vjs-big-play-centered" controls width="<%=vwidth%>" height="<%=vheight%>"
+                 poster="<%=video.thumbnail%>"
+                 data-setup='{"techorder": ["html5"],"rotate": "90", "zoom": "1.5"}'  preload='none'>
+            <source src="<%= video.local_remote_url %>" type='video/mp4'>
+          </video>
+      <% end %>
+  </div>
 </div>

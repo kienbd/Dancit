@@ -1,5 +1,6 @@
 development: &base
   location: "https://dancit.herokuapp.com/"
+  per_page: 20
   fb:
     fb_id: "168713963471223"
     fb_secret: "5806bbbd6ca8047103b24f2e1c706542"

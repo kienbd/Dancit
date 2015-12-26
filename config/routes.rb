@@ -13,11 +13,19 @@ Rails.application.routes.draw do
       delete  :unfollow
       get     :followings
       get     :followers
+      get     :videos
     end
+
+  end
+  resources :categories,only: [:show] do
 
   end
 
   resources :videos,only: [:index,:show,:create,:new,:edit,:update] do
+    collection do
+      get 'recent'
+      get 'hot'
+    end
 
   end
 

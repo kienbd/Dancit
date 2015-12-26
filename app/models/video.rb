@@ -5,6 +5,7 @@ class Video < ActiveRecord::Base
   has_many :course_video_relationships
   has_many :courses, :through => :course_video_relationships
   has_many :stages
+  belongs_to :category
   accepts_nested_attributes_for :stages
 
   mount_uploader :local_remote_url, LocalVideoUploader
@@ -38,7 +39,11 @@ class Video < ActiveRecord::Base
   end
 
   def related_videos
-    videos = Video.where(user_id: self.user_id)
+    own_videos = Video.where(user_id: self.user_id)
+    if own_videos.length < 5
+      own_videos.concat Video.where(category_id: self.category_id)
+    end
+    own_videos
   end
 
   def source_link

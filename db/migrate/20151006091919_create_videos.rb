@@ -2,6 +2,7 @@ class CreateVideos < ActiveRecord::Migration
   def change
     create_table :videos do |t|
       t.integer :user_id
+      t.integer  :category_id
       t.integer :image_id
       t.string  :s3_remote_url, default: nil
       t.string  :local_remote_url, default: nil

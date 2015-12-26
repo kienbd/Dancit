@@ -1,0 +1,35 @@
+<h2 class="text-center"><%= @user.email %></h2>
+<div class="mid-form-holder col-sm-12 col-md-4 col-md-offset-4 col-lg-4 col-lg-offet-4">
+
+  <%= form_for(@user) do |f| %>
+      <p class="bg-danger"><%= flash[:error] %></p>
+      <p class="bg-success"><%= flash[:success] %></p>
+
+      <div class="field form-group">
+        <%= f.label :username %>
+        <%= f.text_field :username,class: "form-control" %>
+      </div>
+
+      <div class="field form-group">
+        <%= f.label :current_password %>
+        <%= f.password_field :current_password,class: "form-control" %>
+      </div>
+
+      <div class="field form-group">
+        <%= f.label :password %>
+        <% if @minimum_password_length %>
+            <em>(<%= @minimum_password_length %> characters minimum)</em>
+        <% end %><br />
+        <%= f.password_field :password, autocomplete: "off",class: "form-control" %>
+      </div>
+
+      <div class="field form-group">
+        <%= f.label :password_confirmation %>
+        <%= f.password_field :password_confirmation, autocomplete: "off",class: "form-control" %>
+      </div>
+
+      <div class="actions form-group">
+        <%= f.submit "Sign up",class: "btn btn-default" %>
+      </div>
+  <% end %>
+</div>

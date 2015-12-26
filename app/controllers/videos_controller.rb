@@ -12,6 +12,7 @@ class VideosController < ApplicationController
 
   def show
     @video = Video.find(params[:id])
+    @related_videos = @video.related_videos
     impressionist(@video)
   end
 

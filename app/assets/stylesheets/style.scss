@@ -143,6 +143,9 @@ body {
 }
 
 .sidebar-video-holder {
+  height: 500px;
+  overflow-x: hidden;
+  overflow-y: auto;
   h3 {
     margin-top: 5px;
     padding-left: 10px;

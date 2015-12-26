@@ -99,15 +99,15 @@
 <div class="pull-right sidebar-video-holder" style="width: 310px">
   <h3> Related Videos </h3>
   <ul class="sidebar-video-list">
-    <% 5.times do |i| %>
+    <% @related_videos.each do |vid| %>
     <li>
       <div class="col-md-6">
-        <img src="/assets/video-thumbnail.png" class="img-responsive">
+        <img src="<%= vid.thumbnail %>" class="img-responsive">
       </div>
       <div class="col-md-6" style="padding: 0px;">
-        <h4 style="margin-bottom: 0px;"> Video name </h4>
-        <a href="#"> Author </a>
-        <div> 10000 views</div>
+        <h4 style="margin-bottom: 0px;"> <%= vid.name %> </h4>
+        <a href="#"> <%= vid.owner.username %> </a>
+        <div> <%= vid.view_count %></div>
       </div>
       <div class="clearfix"></div>
     </li>

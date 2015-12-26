@@ -37,6 +37,10 @@ class Video < ActiveRecord::Base
     self.thumbnail||"assets/assets/video-thumbnail.png"
   end
 
+  def related_videos
+    videos = Video.where(user_id: self.user_id)
+  end
+
   def source_link
     if !self.youtube_remote_url.nil?
       return self.youtube_remote_url

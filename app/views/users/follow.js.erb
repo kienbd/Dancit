@@ -1,5 +1,5 @@
 <% if @res %>
-  alert("Successful");
+  $(".follow-btn").html("<%=j link_to 'unfollow',unfollow_user_path(follow_id: params[:follow_id]),method: :delete, remote: true,class: 'btn btn-danger btn-block' %>")
 <% else %>
   alert("Failed");
 <% end %>

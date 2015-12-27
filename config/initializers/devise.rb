@@ -240,7 +240,7 @@ Devise.setup do |config|
     :scope => 'public_profile,email,user_friends,user_hometown,user_likes,user_location',#,publish_actions',#,manage_pages'#,publish_pages,'
     :info_fields => 'email, name'
   config.omniauth :google_oauth2, APP_CONFIG["gg"]["gg_id"], APP_CONFIG["gg"]["gg_secret"], { }
-  config.omniauth :twitter, "3196323361-oKzinpYZ07rAqKKYW9Cnx7xHc7of2DTUtltcP1J", "qgIAogVQe7PzoK8dL3UbQR44uXjwkF1145DRb90uOPNyC"
+  # config.omniauth :twitter, "3196323361-oKzinpYZ07rAqKKYW9Cnx7xHc7of2DTUtltcP1J", "qgIAogVQe7PzoK8dL3UbQR44uXjwkF1145DRb90uOPNyC"
 
 
   # ==> Warden configuration

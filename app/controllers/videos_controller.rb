@@ -65,6 +65,10 @@ class VideosController < ApplicationController
     end
   end
 
+  def search
+    @videos = Video.where("name LIKE ?","%#{params[:query]}%")
+  end
+
 
   private
 

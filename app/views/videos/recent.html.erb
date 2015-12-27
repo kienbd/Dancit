@@ -17,7 +17,9 @@
     <div class="col-sm-3 sidebar">
       <ul>
         <li><a href="<%= videos_path %>"><span class="glyphicon glyphicon-facetime-video"></span> Lessons</a></li>
-        <li><a href="<%= courses_path %>"><span class="glyphicon glyphicon-list"></span> Courses</a></li>
+        <% if false %>
+          <li><a href="<%= courses_path %>"><span class="glyphicon glyphicon-list"></span> Courses</a></li>
+        <% end %>
         <li><a href="#"><span class="glyphicon glyphicon-star"></span> Styles</a></li>
         <ul>
           <% Category.all.each do |cat| %>

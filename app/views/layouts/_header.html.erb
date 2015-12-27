@@ -8,16 +8,18 @@
         <span class="icon-bar"></span>
         <span class="icon-bar"></span>
       </button>
-      <a class="navbar-brand col-md-2" href="/">Dancit</a>
-      <div class="col-sm-8 col-md-10">
-        <form class="navbar-form" role="search">
+      <a class="navbar-brand col-md-3" href="/">
+        <img src="<%=image_path('logo.png')%>" class="logo">
+      </a>
+      <div class="col-sm-8 col-md-9">
+        <%= form_tag search_videos_path,method: :get,class: "navbar-form" do  %>
           <div class="input-group" style="width: 100%">
-            <input type="text" class="form-control" placeholder="Search" name="srch-term" id="srch-term">
+            <input type="text" class="form-control" placeholder="Search" name="query" id="srch-term">
             <div class="input-group-btn">
               <button class="btn btn-default" type="submit" style="height: 34px"><span class="glyphicon glyphicon-search"></span></button>
             </div>
           </div>
-        </form>
+        <% end %>
       </div>
     </div>
     <div id="navbar" class="navbar-collapse collapse">
@@ -25,7 +27,8 @@
         <% if current_user %>
         <ul class="nav navbar-nav navbar-right">
           <li class="dropdown">
-          <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false"><%= current_user.username %> <span class="glyphicon glyphicon-user">
+          <a href="#" class="dropdown-toggle user-top" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">
+            <%= truncate(current_user.username,length: 20) %> <span class="glyphicon glyphicon-user"></span></a>
             <ul class="dropdown-menu">
               <li><a href="<%= videos_user_path(current_user) %>">My Videos</a></li>
               <li><a href="<%=edit_user_path(current_user)%>">Profile</a></li>
@@ -36,13 +39,13 @@
         </ul>
         <ul class="nav navbar-nav navbar-right">
           <li>
-            <%= link_to "Add new Video",new_video_path %>
+            <%= button_to "Add new Video",new_video_path,class: "btn btn-warning btn-block",method: :get %>
           </li>
         </ul>
         <% else %>
         <ul class="nav navbar-nav navbar-right">
           <li>
-            <%= link_to "Sign In",new_user_session_path %>
+            <%= button_to "Sign In",new_user_session_path,class: "btn btn-default btn-block" %>
           </li>
         </ul>
         <% end %>

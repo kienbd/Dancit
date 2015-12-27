@@ -106,16 +106,18 @@
   <h3> Related Videos </h3>
   <ul class="sidebar-video-list">
     <% @related_videos.each do |vid| %>
-    <li>
-      <div class="col-md-6">
-        <img src="<%= vid.thumbnail %>" class="img-responsive">
-      </div>
-      <div class="col-md-6" style="padding: 0px;">
-        <h4 style="margin-bottom: 0px;"> <%= vid.name %> </h4>
-        <a href="#"> <%= vid.owner.username %> </a>
-        <div> <%= vid.view_count %></div>
-      </div>
-      <div class="clearfix"></div>
+    <li class="related-item">
+      <a href="<%= video_path vid %>">
+        <div class="col-md-6">
+          <img src="<%= vid.thumbnail %>" class="img-responsive">
+        </div>
+        <div class="col-md-6" style="padding: 0px;">
+          <h4 style="margin-bottom: 0px;color: black"> <%= vid.name %> </h4>
+          <div> <%= vid.owner.username %> </div>
+          <div> <span><i class="fa fa-eye"></i></span> <%= vid.view_count %> views</div>
+        </div>
+        <div class="clearfix"></div>
+      </a>
     </li>
     <% end %>
   </ul>

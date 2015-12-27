@@ -3,15 +3,12 @@
     <div class="vid-index-main-content col-sm-9">
       <div class="row">
         <div class="col-sm-12">
-          <h3 style="color: #ec971f"><%= @category.name.capitalize %></h3>
+          <h3> Search result : <%= params[:query]%></h3>
         </div>
         <% @videos.each do |vid| %>
             <%= render partial: "videos/vid_thumb",locals: {vid: vid} %>
         <% end%>
         <div class="clear clearfix"></div>
-        <div>
-          <%= will_paginate @videos %>
-        </div>
       </div>
     </div>
     <div class="col-sm-3 sidebar">
@@ -19,15 +16,11 @@
         <li><a href="<%= videos_path %>"><span class="glyphicon glyphicon-facetime-video"></span> Lessons</a></li>
         <% if false %>
           <li><a href="<%= courses_path %>"><span class="glyphicon glyphicon-list"></span> Courses</a></li>
-        <% end %>
+        <% end%>
         <li><a href="#"><span class="glyphicon glyphicon-star"></span> Styles</a></li>
         <ul>
           <% Category.all.each do |cat| %>
-              <li>
-                <a href="<%= category_path(cat)%>" style="<%= cat.id == @category.id ? 'color: #ec971f' : ''%>">
-                  <%= cat.name.capitalize %>
-                </a>
-              </li>
+              <li><a href="<%= category_path(cat)%>"><%= cat.name.capitalize %></a></li>
           <% end %>
         </ul>
       </ul>

@@ -1,8 +1,13 @@
-<li>
-  <p>
-    <b> <%= com.title %> </b>
-    <br>
-    <span style="margin-left: 10px;"> <%= com.comment %> </span>
-  </p>
+<li style="margin-bottom: 5px">
+  <div style="display: inline-block;margin-right: 10px;">
+    <img src="<%= com.user.avatar_src%>" style="width: 50px;">
+  </div>
+  <div style="display: inline-block;vertical-align: middle">
+    <p>
+      <b> <%= com.title %> </b>
+      <br>
+      <span style="margin-left: 10px;"> <%= com.comment %> </span>
+    </p>
+  </div>
 </li>
 

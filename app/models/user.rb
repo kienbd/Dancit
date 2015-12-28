@@ -22,6 +22,10 @@ class User < ActiveRecord::Base
   has_many :followings, through: :active_fellowships,  source: :followed
   has_many :followers, through: :passive_fellowships, source: :follower
 
+
+  validates_format_of :email, :with => /\A([^@\s]+)@((?:[-a-z0-9]+\.)+[a-z]{2,})\z/i
+
+
   # vote and like
   acts_as_voter
 
@@ -58,6 +62,14 @@ class User < ActiveRecord::Base
 
   def following?(other_user)
     followings.include?(other_user)
+  end
+
+  def avatar_src
+    if self.avatar.nil? || self.avatar.empty?
+      "https://lh3.googleusercontent.com/-XdUIqdMkCWA/AAAAAAAAAAI/AAAAAAAAAAA/4252rscbv5M/photo.jpg"
+    else
+      self.avatar
+    end
   end
 
 end

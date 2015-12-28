@@ -1,4 +1,6 @@
 class VideosController < ApplicationController
+  before_action :authenticate_user!,only: [:edit,:update,:new,:create]
+  append_before_action :user_authen,only: [:edit,:update]
   impressionist :action => [:show],:unique => [:session_hash]
 
   def index
@@ -74,6 +76,13 @@ class VideosController < ApplicationController
 
   def permitted_params
     params.require(:video).permit(:artist,:description,:name,:local_remote_url,:youtube_remote_url,:category_id,:stages_attributes => [:id,:name,:start_at,:end_at])
+  end
+
+  def user_authen
+    video = Video.find(params[:id])
+    if current_user.id != video.owner.id
+      redirect_to root_path
+    end
   end
 
 end

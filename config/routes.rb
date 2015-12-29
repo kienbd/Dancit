@@ -7,6 +7,8 @@ Rails.application.routes.draw do
     get 'sign_in', :to => 'devise/sessions#new', :as => :new_user_session
     get 'sign_out', :to => 'devise/sessions#destroy', :as => :destroy_user_session
   end
+  get 'help',to: 'home#help'
+  get 'copyright',to: 'home#copyright'
   resources :users do
     member do
       post    :follow

@@ -68,7 +68,7 @@ class VideosController < ApplicationController
   end
 
   def search
-    @videos = Video.where("name LIKE ?","%#{params[:query]}%")
+    @videos = Video.where("name LIKE COLLATE UTF8_GENERAL_CI LIKE ?","%#{params[:query]}%")
   end
 
 

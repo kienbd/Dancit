@@ -256,6 +256,13 @@ li.dropdown.open a {
   color: #333 !important;
 }
 
+.dropdown-menu li {
+  background: white;
+  &:hover {
+    background: #eee;
+  }
+}
+
 .sidebar a:hover {
   color: #f5942e;
 }

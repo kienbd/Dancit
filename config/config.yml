@@ -2,11 +2,18 @@ development: &base
   location: "https://dancit.herokuapp.com/"
   per_page: 20
   fb:
-    fb_id: "168713963471223"
-    fb_secret: "5806bbbd6ca8047103b24f2e1c706542"
+    fb_id: "1402075363354705"
+    fb_secret: "76a20c0ab79bf3a7496225c7876f1813"
   gg:
     gg_id: "286816984335-pvmq2mjqj7ec698q5v8ppec5k07q51so.apps.googleusercontent.com"
     gg_secret: "R9cxp4etzmXEbl0ymvVmLfAd"
 
 production:
-  <<: *base
+  location: "https://dancit.herokuapp.com/"
+  per_page: 20
+  fb:
+    fb_id: "168713963471223"
+    fb_secret: "5806bbbd6ca8047103b24f2e1c706542"
+  gg:
+    gg_id: "286816984335-pvmq2mjqj7ec698q5v8ppec5k07q51so.apps.googleusercontent.com"
+    gg_secret: "R9cxp4etzmXEbl0ymvVmLfAd"

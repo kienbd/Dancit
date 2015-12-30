@@ -6,7 +6,7 @@ class Video < ActiveRecord::Base
   has_many :courses, :through => :course_video_relationships
   has_many :stages
   belongs_to :category
-  accepts_nested_attributes_for :stages
+  accepts_nested_attributes_for :stages,allow_destroy: true
 
   mount_uploader :local_remote_url, LocalVideoUploader
 

@@ -75,7 +75,7 @@ class VideosController < ApplicationController
   private
 
   def permitted_params
-    params.require(:video).permit(:artist,:description,:name,:local_remote_url,:youtube_remote_url,:category_id,:stages_attributes => [:id,:name,:start_at,:end_at])
+    params.require(:video).permit(:artist,:description,:name,:local_remote_url,:youtube_remote_url,:category_id,:stages_attributes => [:id,:name,:start_at,:end_at,:_destroy])
   end
 
   def user_authen

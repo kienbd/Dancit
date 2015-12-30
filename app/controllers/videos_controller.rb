@@ -68,7 +68,7 @@ class VideosController < ApplicationController
   end
 
   def search
-    @videos = Video.where("name LIKE ?","%#{params[:query]}%")
+    @videos = Video.where("LOWER(name) LIKE LOWER(?)","%#{params[:query]}%")
   end
 
 

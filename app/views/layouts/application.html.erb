@@ -2,15 +2,16 @@
 <html>
 <head>
   <title>Dancit</title>
+  <meta property="og:type" content="website" />
+  <%= yield :fb_head %>
+  <meta property="fb:app_id" content="168713963471223" />
+  <meta property="fb:admins" content="100003883255874" />
+
   <script src="https://vjs.zencdn.net/4.12/video.js"></script>
   <link href="https://vjs.zencdn.net/4.12/video-js.css" rel="stylesheet">
   <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track' => true %>
   <%= javascript_include_tag 'application', 'data-turbolinks-track' => true %>
   <%= csrf_meta_tags %>
-  <meta property="og:type" content="website" />
-  <meta property="og:site_name" content="Dancit" />
-  <meta property="fb:app_id" content="168713963471223" />
-  <%= yield :fb_head %>
 </head>
 <body>
   <%= render partial: "layouts/header" %>

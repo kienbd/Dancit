@@ -274,3 +274,9 @@ li.dropdown.open a {
     text-decoration: underline;
   }
 }
+.dropdown-menu li {
+  background: white;
+}
+.dropdown-menu li:hover {
+  background: #aeaeae;
+}

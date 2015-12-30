@@ -3,8 +3,8 @@
     <a href="<%=video_path(vid)%>" data-method="get" >
       <img src="<%= vid.thumbnail %>" class="img-responsive vid-thumb-img" alt="thumb">
       <div>
-        <h4 style="margin: 5px 0px 0px 0px"> <%= vid.name %> </h4>
-        <span>  by  <%= vid.owner.username %></span>
+        <h4 style="margin: 5px 0px 0px 0px"> <%= truncate(vid.name,length: 23) %> </h4>
+        <span>  by  <%= truncate(vid.owner.username,length: 23) %></span>
         <br>
         <span><i class="fa fa-eye"></i> <%= vid.view_count %> views </span>
       </div>
